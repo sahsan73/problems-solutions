@@ -64,19 +64,19 @@ public:
         ST[curr] = ST[2*curr+1]^ST[2*curr+2];
     }
 
-    int query(int i, int j, int l, int r, int curr) {
+    int query(int i, int j, int curr, int l, int r) {
         // no overlap
         if(i>r || j<l) return 0;
         // complete overlap
         if(i>=l && j<=r) return ST[curr];
 
         int m = (i + j) / 2;
-        int left_query = query(i, m, l, r, 2*curr+1);
-        int right_query = query(m+1, j, l, r, 2*curr+2);
+        int left_query = query(i, m, 2*curr+1, l, r);
+        int right_query = query(m+1, j, 2*curr+2, l, r);
         return left_query^right_query;
     }
     int query(int l, int r) {
-        return query(0, n-1, l, r, 0);
+        return query(0, n-1, 0, l, r);
     }
 };
 
