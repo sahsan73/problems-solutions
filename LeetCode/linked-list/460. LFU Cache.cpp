@@ -1,5 +1,3 @@
-#define sz(x) (int)(x).size()
-
 class LFUCache {
 private:
     unordered_map<int, list<pair<int,int>>> lruLists;   // (fq, list)
