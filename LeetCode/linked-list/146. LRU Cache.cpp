@@ -1,9 +1,53 @@
+class LRUCache {
+private:
+    list<pair<int,int>> ls;
+    unordered_map<int, list<pair<int,int>>::iterator> mp;
+    int capacity; 
+public:
+    LRUCache(int capacity) {
+        this->capacity = capacity;
+    }
+    
+    int get(int key) {
+        if(!mp.count(key)) return -1;
+
+        ls.splice(ls.begin(), ls, mp[key]);
+        return mp[key]->second;
+    }
+    
+    void put(int key, int value) {
+        // if the key does NOT exist
+        if(!mp.count(key)) {
+            ls.push_front(make_pair(key, value));
+            mp[key] = ls.begin();
+        } else {    // if the key ALREADY exists
+            mp[key]->second = value;
+            ls.splice(ls.begin(), ls, mp[key]);
+        }
+
+        // if the current size of the list exceeds the limit
+        if((int)ls.size() > capacity) {
+            auto d_key = ls.back();
+            ls.pop_back();
+            mp.erase(d_key.first);
+        }
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 struct Node {
     int key, val;
     Node *prev, *next;
     Node(int key, int val) : key{key}, val{val}, prev{nullptr}, next{nullptr} {}
 };
-
 
 class LRUCache {
 private:
