@@ -1,3 +1,7 @@
+/*
+Note: This problem is an extension of "146. LRU Cache".
+Problem URL: https://leetcode.com/problems/lru-cache/
+*/
 class LFUCache {
 private:
     unordered_map<int, list<pair<int,int>>> lruLists;   // (fq, list)
