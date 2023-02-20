@@ -41,15 +41,15 @@ private:
             ans.push_back(s);
             return;
         }
-
-        // exclude the element at index
-        subsets(nums, i+1, s, ans);
-
+        
         // include the element at index i
         s.push_back(nums[i]);
         subsets(nums, i+1, s, ans);
         
         s.pop_back();   // backtrack
+
+        // exclude the element at index
+        subsets(nums, i+1, s, ans);
     }
 
 public:
