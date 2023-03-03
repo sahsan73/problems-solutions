@@ -1,4 +1,6 @@
 /*
+Problem Statement: https://www.hackerrank.com/challenges/the-power-sum/problem
+
 APPROACH: BACKTRACKING
 
 COMPLEXITY:
